@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { Link, NavLink, Outlet, Route, Routes } from 'react-router-dom';
 import AppBar from './AppBar';
+import Home from './screens/Home';
+import Products from './screens/Products';
+
+function Layout() {
+  return <Outlet />;
+}
 
 function App() {
-  console.log(window.ipcRenderer);
+  // console.log('ipcRenderer', window.ipcRenderer);
 
   const [isOpen, setOpen] = useState(false);
   const [isSent, setSent] = useState(false);
@@ -17,6 +24,7 @@ function App() {
       setFromMain(null);
     }
   };
+
   const sendMessageToElectron = () => {
     if (window.Main) {
       window.Main.sendMessage("Hello I'm from React World");
@@ -40,8 +48,28 @@ function App() {
           <AppBar />
         </div>
       )}
-      <div className="flex-auto">
-        <div className=" flex flex-col justify-center items-center h-full bg-gray-800 space-y-4">
+      <div className="flex flex-row flex-auto bg-gray-800">
+        <div className="flex flex-col h-full bg-gray-900 w-1/4 text-white">
+          <NavLink to="/" className="p-3 hover:bg-gray-700">
+            Home
+          </NavLink>
+          <NavLink
+            to="/products"
+            className={({ isActive }) => (isActive ? 'p-3 bg-gray-700' : 'p-3 hover:bg-gray-700')}
+          >
+            Produtos
+          </NavLink>
+        </div>
+        <div className="h-full flex flex-col w-9/12 p-3 text-white">
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="products" element={<Products />} />
+            </Route>
+          </Routes>
+        </div>
+
+        {/* <div className="flex flex-col justify-center items-center h-full bg-gray-800 space-y-4">
           <h1 className="text-2xl text-gray-200">Vite + React + Typescript + Electron + Tailwind</h1>
           <button
             className="bg-yellow-400 py-2 px-4 rounded focus:outline-none shadow hover:bg-yellow-200"
@@ -73,7 +101,7 @@ function App() {
               )}
             </div>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );

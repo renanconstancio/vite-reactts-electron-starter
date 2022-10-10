@@ -1,0 +1,10 @@
+{
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "[css]": {
+    "editor.defaultFormatter": "MikeBovenlander.formate"
+  },
+}
