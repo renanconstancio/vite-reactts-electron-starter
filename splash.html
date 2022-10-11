@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+    <title>Carregando... !</title>
+    <style>
+      @-webkit-keyframes flip-horizontal-bottom {
+        0% {
+          -webkit-transform: rotateX(0);
+                  transform: rotateX(0);
+        }
+        100% {
+          -webkit-transform: rotateX(-180deg);
+                  transform: rotateX(-180deg);
+        }
+      }
+      @keyframes flip-horizontal-bottom {
+        0% {
+          -webkit-transform: rotateX(0);
+                  transform: rotateX(0);
+        }
+        100% {
+          -webkit-transform: rotateX(-180deg);
+                  transform: rotateX(-180deg);
+        }
+      }
+
+      * { 
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html{
+        background-color: #000;
+      }
+      
+      body {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      div {
+        height: 60px;
+        width: 60px;
+        background-color: #303030;
+      }
+
+      .flip-horizontal-bottom {
+        -webkit-animation: flip-horizontal-bottom 0.9s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+                animation: flip-horizontal-bottom 0.9s cubic-bezier(0.455, 0.030, 0.515, 0.955) infinite both;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flip-horizontal-bottom"></div>
+  </body>
+</html>

@@ -15,13 +15,24 @@ function createWindow() {
     height,
     //  change to false to use AppBar
     frame: false,
-    show: true,
+    show: false,
     resizable: true,
     fullscreenable: true,
     webPreferences: {
       preload: join(__dirname, 'preload.js')
     }
   });
+
+  const splash = new BrowserWindow({
+    height,
+    width,
+    transparent: true,
+    frame: false,
+    alwaysOnTop: true
+  });
+
+  splash.loadFile('splash.html');
+  splash.center();
 
   const port = process.env.PORT || 3000;
   const url = isDev ? `http://localhost:${port}` : join(__dirname, '../src/out/index.html');
@@ -41,6 +52,7 @@ function createWindow() {
     window.isMinimized() ? window.restore() : window.minimize();
     // or alternatively: win.isVisible() ? win.hide() : win.show()
   });
+
   ipcMain.on('maximize', () => {
     // eslint-disable-next-line no-unused-expressions
     window.isMaximized() ? window.restore() : window.maximize();
@@ -49,6 +61,11 @@ function createWindow() {
   ipcMain.on('close', () => {
     window.close();
   });
+
+  window.once('ready-to-show', () => {
+    window.show();
+    splash.hide();
+  });
 }
 
 // This method will be called when Electron has finished
@@ -56,7 +73,7 @@ function createWindow() {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   createWindow();
-
+  // splash.close();
   app.on('activate', () => {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.

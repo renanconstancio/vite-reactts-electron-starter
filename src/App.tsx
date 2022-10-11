@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, NavLink, Outlet, Route, Routes } from 'react-router-dom';
+import { NavLink, Outlet, Route, Routes } from 'react-router-dom';
 import AppBar from './AppBar';
 import Home from './screens/Home';
 import Products from './screens/Products';
@@ -15,24 +15,24 @@ function App() {
   const [isSent, setSent] = useState(false);
   const [fromMain, setFromMain] = useState<string | null>(null);
 
-  const handleToggle = () => {
-    if (isOpen) {
-      setOpen(false);
-      setSent(false);
-    } else {
-      setOpen(true);
-      setFromMain(null);
-    }
-  };
+  // const handleToggle = () => {
+  //   if (isOpen) {
+  //     setOpen(false);
+  //     setSent(false);
+  //   } else {
+  //     setOpen(true);
+  //     setFromMain(null);
+  //   }
+  // };
 
-  const sendMessageToElectron = () => {
-    if (window.Main) {
-      window.Main.sendMessage("Hello I'm from React World");
-    } else {
-      setFromMain('You are in a Browser, so no Electron functions are available');
-    }
-    setSent(true);
-  };
+  // const sendMessageToElectron = () => {
+  //   if (window.Main) {
+  //     window.Main.sendMessage("Hello I'm from React World");
+  //   } else {
+  //     setFromMain('You are in a Browser, so no Electron functions are available');
+  //   }
+  //   setSent(true);
+  // };
 
   useEffect(() => {
     if (isSent && window.Main)
